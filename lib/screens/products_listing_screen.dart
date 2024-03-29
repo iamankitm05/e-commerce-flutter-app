@@ -26,7 +26,7 @@ class ProductsListingScreen extends StatelessWidget {
                 product: products[index],
                 foregroundColor: foregroundColor,
                 onTap: () {
-                  ProductDetailsScreen.goToProductDetailsScreen(
+                  ProductDetailsScreen.navigate(
                     context: context,
                     product: products[index],
                   );

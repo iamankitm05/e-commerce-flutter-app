@@ -1,5 +1,7 @@
+import 'package:e_commerce_flutter_app/screens/shopping_cart_screen.dart';
 import 'package:e_commerce_flutter_app/theme/cubit/app_theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,11 +16,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(text),
       actions: [
-        IconButton(
-          onPressed: () {
+        GestureDetector(
+          onTap: () {
             context.read<AppThemeCubit>().toggleTheme();
           },
-          icon: BlocBuilder<AppThemeCubit, AppThemeState>(
+          child: BlocBuilder<AppThemeCubit, AppThemeState>(
             builder: (context, state) {
               return Icon(
                 state.isLightThemeActive ? Icons.dark_mode : Icons.light_mode,
@@ -26,7 +28,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ),
-        const SizedBox(width: 20)
+        const SizedBox(width: 14),
+        GestureDetector(
+          onTap: () {
+            ShoppingCartScreen.navigate(context: context);
+          },
+          child: const Icon(Icons.add_shopping_cart),
+        ),
+        const SizedBox(width: 20),
       ],
     );
   }

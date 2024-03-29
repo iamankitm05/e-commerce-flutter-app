@@ -1,4 +1,6 @@
+import 'package:e_commerce_flutter_app/cubit/shopping_cart/shopping_cart_cubit.dart';
 import 'package:e_commerce_flutter_app/init_dependencies.dart';
+import 'package:e_commerce_flutter_app/cubit/product_slide_indicator/product_slide_indicator_cubit.dart';
 import 'package:e_commerce_flutter_app/screens/products_listing_screen.dart';
 import 'package:e_commerce_flutter_app/theme/app_theme.dart';
 import 'package:e_commerce_flutter_app/theme/cubit/app_theme_cubit.dart';
@@ -11,6 +13,8 @@ void main() async {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(create: (context) => getIt<AppThemeCubit>()),
+      BlocProvider(create: (context) => getIt<ProductSlideIndicatorCubit>()),
+      BlocProvider(create: (context) => getIt<ShoppingCartCubit>()),
     ],
     child: const MyApp(),
   ));
