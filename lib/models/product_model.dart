@@ -54,7 +54,7 @@ const products = [
       "Light Laptop without Optical Disk Drive",
     ],
   ),
-  ProductModel( 
+  ProductModel(
     id: 2,
     name: "HP 14a",
     images: [

@@ -23,6 +23,7 @@ class ShoppingCartScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(
         text: 'My Cart',
+        isCartScreen: true,
       ),
       body: BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
         builder: (context, state) {

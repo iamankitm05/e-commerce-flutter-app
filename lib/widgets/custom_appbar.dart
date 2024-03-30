@@ -1,14 +1,15 @@
 import 'package:e_commerce_flutter_app/screens/shopping_cart_screen.dart';
 import 'package:e_commerce_flutter_app/theme/cubit/app_theme_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
+  final bool isCartScreen;
   const CustomAppBar({
     super.key,
     required this.text,
+    this.isCartScreen = false,
   });
 
   @override
@@ -28,13 +29,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ),
-        const SizedBox(width: 14),
-        GestureDetector(
-          onTap: () {
-            ShoppingCartScreen.navigate(context: context);
-          },
-          child: const Icon(Icons.add_shopping_cart),
-        ),
+        if (!isCartScreen) ...[
+          const SizedBox(width: 14),
+          GestureDetector(
+            onTap: () {
+              ShoppingCartScreen.navigate(context: context);
+            },
+            child: const Icon(Icons.add_shopping_cart),
+          )
+        ],
         const SizedBox(width: 20),
       ],
     );

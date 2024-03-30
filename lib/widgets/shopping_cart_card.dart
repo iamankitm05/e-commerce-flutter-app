@@ -1,5 +1,7 @@
+import 'package:e_commerce_flutter_app/cubit/shopping_cart/shopping_cart_cubit.dart';
 import 'package:e_commerce_flutter_app/models/cart_items_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShoppingCartCard extends StatelessWidget {
   final CartItemsModel cartItem;
@@ -34,37 +36,48 @@ class ShoppingCartCard extends StatelessWidget {
                       width: 80,
                     ),
                     const SizedBox(height: 14),
-                    Container(
+                    SizedBox(
                       width: 68,
-                      color: Colors.grey[200],
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 22,
-                            height: 22,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.blueGrey),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              size: 18,
+                          InkWell(
+                            onTap: () {
+                              context
+                                  .read<ShoppingCartCubit>()
+                                  .addProduct(product);
+                            },
+                            child: Container(
+                              width: 22,
+                              height: 22,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueGrey),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                size: 18,
+                              ),
                             ),
                           ),
                           Text(quentity.toString()),
-                          Container(
-                            width: 22,
-                            height: 22,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.blueGrey),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: const Icon(
-                              Icons.remove,
-                              size: 18,
+                          InkWell(
+                            onTap: () {
+                              context
+                                  .read<ShoppingCartCubit>()
+                                  .decreaseProductQuentity(product);
+                            },
+                            child: Container(
+                              width: 22,
+                              height: 22,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueGrey),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Icon(
+                                Icons.remove,
+                                size: 18,
+                              ),
                             ),
                           ),
                         ],
@@ -119,40 +132,36 @@ class ShoppingCartCard extends StatelessWidget {
             ),
           ),
           const Divider(height: 0),
-          const SizedBox(
-            height: 50,
+          SizedBox(
+            height: 45,
             child: Row(
               children: [
                 Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.delete_forever_outlined),
-                      SizedBox(width: 8),
-                      Text('Remove'),
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      context.read<ShoppingCartCubit>().removeProduct(product);
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.delete_forever_outlined),
+                        SizedBox(width: 8),
+                        Text('Remove'),
+                      ],
+                    ),
                   ),
                 ),
-                VerticalDivider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.save_alt_outlined),
-                    SizedBox(width: 8),
-                    Text(
-                      'Save for later',
-                      maxLines: 1,
-                    ),
-                  ],
-                ),
-                VerticalDivider(),
-                Flexible(
+                const VerticalDivider(),
+                const Flexible(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.delete_forever_outlined),
+                      Icon(Icons.save_alt_outlined),
                       SizedBox(width: 8),
-                      Text('Remove'),
+                      Text(
+                        'Save for later',
+                        maxLines: 1,
+                      ),
                     ],
                   ),
                 ),

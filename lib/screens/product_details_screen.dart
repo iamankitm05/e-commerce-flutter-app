@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce_flutter_app/cubit/shopping_cart/shopping_cart_cubit.dart';
 import 'package:e_commerce_flutter_app/models/product_model.dart';
 import 'package:e_commerce_flutter_app/cubit/product_slide_indicator/product_slide_indicator_cubit.dart';
+import 'package:e_commerce_flutter_app/screens/shopping_cart_screen.dart';
 import 'package:e_commerce_flutter_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -130,7 +132,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<ShoppingCartCubit>().addProduct(product);
+                        },
                         style: IconButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             side: const BorderSide(color: Colors.blueGrey),
@@ -142,7 +146,10 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<ShoppingCartCubit>().addProduct(product);
+                          ShoppingCartScreen.navigate(context: context);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber,
                           foregroundColor: Colors.black,
